@@ -1,0 +1,50 @@
+<project name="Grain-Bank" default="compile">
+    <path id="jetty.cp">
+        <fileset dir="../Jetty"/>
+    </path>
+    <path id="lib.cp">
+        <pathelement location="lib/freemarker.jar"/>
+        <pathelement location="lib/javax.servlet-api-4.0.1.jar"/>
+        <path refid="jetty.cp"/>
+    </path>
+    <path id="dist.cp">
+        <path refid="lib.cp"/>
+        <pathelement location="dist/bank.jar"/>
+    </path>
+
+
+    <target name="init">
+        <echo message="Project ${ant.project.name} initialization." />
+        <mkdir dir="bin"/>
+        <mkdir dir="dist"/>
+    </target>
+    <target name="compile" depends="init">
+        <echo message="Compiling ${ant.project.name} project..." />
+        <javac srcdir="src" destdir="bin" includeantruntime="false" classpathref="lib.cp" />
+    </target>
+    <target name="copy" depends="init">
+        <echo message="copying res contents to bin directory" />
+        <copy todir="bin">
+            <fileset dir="res"/>
+        </copy>
+    </target>
+    <target name="dist" depends="compile, copy, init">
+        <echo message="Prepare the jar for distribution of ${ant.project.name} project." />
+        <jar destfile="dist/bank.jar">
+            <fileset dir="bin"/>
+        </jar>
+    </target>
+    <target name="clean">
+        <echo message="removing bin directory" />
+        <delete dir="bin"/>
+    </target>
+    <target name="clean-all" depends="clean">
+        <echo message="deleting dist directory" />
+        <delete dir="dist"/>
+    </target>
+    <target name="run" depends="dist">
+        <echo message="Running ${ant.project.name} project..." />
+        <java classname="put.io.selenium.atm.SimpleServer" classpathref="dist.cp" />
+
+    </target>
+</project>
