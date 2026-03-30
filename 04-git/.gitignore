@@ -5,6 +5,3 @@
 # Java build files
 *.class
 target/
-# System files
-.DS_Store
-Thumbs.db
