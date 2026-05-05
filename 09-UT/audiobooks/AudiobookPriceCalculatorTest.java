@@ -7,12 +7,12 @@ import static org.junit.jupiter.api.Assertions.*;
 
 class AudiobookPriceCalculatorTest {
 
-    AudiobookPriceCalculator audiobookPriceCalculator = null;
-    Audiobook audiobook = null;
-    Customer customer1 = null;
-    Customer customer2 = null;
-    Customer customer3 = null;
-    Customer customer4 = null;
+    private AudiobookPriceCalculator audiobookPriceCalculator = null;
+    private Audiobook audiobook = null;
+    private Customer customer1 = null;
+    private Customer customer2 = null;
+    private Customer customer3 = null;
+    private Customer customer4 = null;
 
 
     @BeforeEach
